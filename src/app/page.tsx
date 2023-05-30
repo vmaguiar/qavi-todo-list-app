@@ -17,7 +17,7 @@ export default function Home() {
     todoDoneList: []
   });
 
-  const [tempTodoText, setTempTodoText] = useState([]);
+  const [tempTodoText, setTempTodoText] = useState('');
 
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +41,14 @@ export default function Home() {
     }
   };
 
+  // const handleOnClick = () => {
+  //   if(tempTodoText) {
+  //     setTodoCard((oldTodoCard) => {
+  //       retrun {...oldTodoCard, }
+  //     })
+  //   }
+  // }
+
 
   return (
     <div className="min-h-screen">
@@ -50,22 +58,30 @@ export default function Home() {
       </header>
 
       <main className="flex flex-col items-center justify-between my-16">
-        <div className="flex flex-col items-center w-2/4 rounded-md border-solid border-2 border-gray-700 p-6">
-          <p>add title</p>
+        <div className="flex flex-col items-center w-2/4 rounded-md border-solid border-2 border-gray-400 p-6 bg-white">
+          <p>Title</p>
           <input
             type="text"
             name="title"
             placeholder="Add a Title"
-            className="w-10/12 rounded-md"
+            className="w-10/12 rounded-md mt-1 outline outline-1 outline-gray-300"
             onChange={(event) => { handleOnChange(event)}}
           />
-          <p>add todo</p>
+          <p className="mt-6">What do I have to do?</p>
           <input
             type="text"
             name="singletodoText"
             placeholder="Add Todo"
-            className="w-10/12 rounded-md"
+            className="w-10/12 rounded-md mt-1 outline outline-1 outline-gray-300"
             onChange={(event) => { handleOnChange(event)}}/>
+
+          <button
+            className="w-1/4 rounded-md border-solid border-2 border-gray-400 mt-4 p-1"
+            // onClick={() => {handleOnClick()}}
+          >
+            Add
+          </button>
+
         </div>
       
         {/* Container with all to do cards */}
