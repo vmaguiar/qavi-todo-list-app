@@ -17,6 +17,9 @@ export default function Home() {
     todoDoneList: []
   });
 
+  const [tempTodoText, setTempTodoText] = useState([]);
+
+
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {value, name} = event.target;
     // console.log(name);
@@ -38,6 +41,7 @@ export default function Home() {
     }
   };
 
+
   return (
     <div className="min-h-screen">
       <header className="min-w-full flex items-center justify-evenly pt-16">
@@ -48,9 +52,20 @@ export default function Home() {
       <main className="flex flex-col items-center justify-between my-16">
         <div className="flex flex-col items-center w-2/4 rounded-md border-solid border-2 border-gray-700 p-6">
           <p>add title</p>
-          <input type="text" name="title" className="w-2/3" onChange={(event) => { handleOnChange(event)}}/>
+          <input
+            type="text"
+            name="title"
+            placeholder="Add a Title"
+            className="w-10/12 rounded-md"
+            onChange={(event) => { handleOnChange(event)}}
+          />
           <p>add todo</p>
-          <input type="text" name="singletodoText" className="w-full" onChange={(event) => { handleOnChange(event)}}/>
+          <input
+            type="text"
+            name="singletodoText"
+            placeholder="Add Todo"
+            className="w-10/12 rounded-md"
+            onChange={(event) => { handleOnChange(event)}}/>
         </div>
       
         {/* Container with all to do cards */}
