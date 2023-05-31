@@ -34,20 +34,17 @@ export default function Home() {
 
     else if(name === 'singletodoText') {
       console.log('entrou no todo list')
-      setTodoCard((oldTodoCard) => {
-        const newTodoCard = {...oldTodoCard, todoList: [value]}
-        return newTodoCard
-      })
+      setTempTodoText(value)
     }
   };
 
-  // const handleOnClick = () => {
-  //   if(tempTodoText) {
-  //     setTodoCard((oldTodoCard) => {
-  //       retrun {...oldTodoCard, }
-  //     })
-  //   }
-  // }
+  const handleOnClick = () => {
+    setTodoCard((oldTodoCard) => {
+      oldTodoCard.todoList.push(tempTodoText)
+      return {...oldTodoCard}
+    })
+    setTempTodoText('')
+  }
 
 
   return (
@@ -71,17 +68,26 @@ export default function Home() {
           <input
             type="text"
             name="singletodoText"
+            value={tempTodoText}
             placeholder="Add Todo"
             className="w-10/12 rounded-md mt-1 outline outline-1 outline-gray-300"
             onChange={(event) => { handleOnChange(event)}}/>
 
           <button
             className="w-1/4 rounded-md border-solid border-2 border-gray-400 mt-4 p-1"
-            // onClick={() => {handleOnClick()}}
+            onClick={() => {handleOnClick()}}
           >
             Add
           </button>
 
+          {
+            todoCard.todoList.map((element, index) => (
+              <div key={index}>
+                <input type="checkbox" name={element} id={element} />
+                <label htmlFor={element}> {element} </label>
+              </div>
+            ))
+          }
         </div>
       
         {/* Container with all to do cards */}
