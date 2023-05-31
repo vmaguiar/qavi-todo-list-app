@@ -23,18 +23,17 @@ export default function Home() {
 
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value, name} = event.target;
+    const { value, name } = event.target;
     // console.log(name);
 
-    if(name === 'title') {
+    if (name === 'title') {
       setTodoCard((oldTodoCard) => {
-        const newTodoList = {...oldTodoCard, title: value}
-        console.log(`entrou no title => ${newTodoList}`);
+        const newTodoList = { ...oldTodoCard, title: value }
         return newTodoList;
       })
     }
 
-    else if(name === 'singletodoText') {
+    else if (name === 'singletodoText') {
       setTempTodoText(value)
     }
   };
@@ -42,7 +41,7 @@ export default function Home() {
   const handleOnClick = () => {
     setTodoCard((oldTodoCard) => {
       oldTodoCard.todoList.push(tempTodoText)
-      return {...oldTodoCard}
+      return { ...oldTodoCard }
     })
     setTempTodoText('')
   }
@@ -54,18 +53,23 @@ export default function Home() {
     })
     setTodoCard({
       title: '',
-    todoList: [],
-    todoDoneList: []
+      todoList: [],
+      todoDoneList: []
     })
   }
+
+  // const deleteTodoItem = (event) => {
+  //   console.log(event)
+  // }
 
 
   return (
     <div className="min-h-screen">
       <header className="min-w-full flex items-center justify-evenly pt-16">
-        <h1 className="text-3xl font-bold">To do List</h1>
+        <h1 className="text-4xl font-bold">To do List</h1>
         <p>Made by: @vmaguiar</p>
       </header>
+
 
       <main className="flex flex-col items-center justify-between my-16">
         <div className="flex flex-col items-center w-2/4 rounded-md border-solid border-2 border-gray-400 p-6 bg-white">
@@ -76,8 +80,9 @@ export default function Home() {
             value={todoCard.title}
             placeholder="Add a Title"
             className="w-10/12 rounded-md mt-1 outline outline-1 outline-gray-300"
-            onChange={(event) => { handleOnChange(event)}}
+            onChange={(event) => { handleOnChange(event) }}
           />
+
           <p className="mt-6">What do I have to do?</p>
           <input
             type="text"
@@ -85,54 +90,39 @@ export default function Home() {
             value={tempTodoText}
             placeholder="Add Todo"
             className="w-10/12 rounded-md mt-1 outline outline-1 outline-gray-300"
-            onChange={(event) => { handleOnChange(event)}}/>
-          
+            onChange={(event) => { handleOnChange(event) }} />
+
+
+
           <div className="flex justify-center w-full">
             <button
               className="w-1/4 rounded-md border-solid border-2 border-gray-400 mt-4 mr-2 p-1"
-              onClick={() => {handleOnClick()}}
+              onClick={() => { handleOnClick() }}
             >
               Add
             </button>
 
             <button
               className="w-1/4 rounded-md border-solid border-2 border-gray-400 mt-4 ml-2 p-1"
-              onClick={() => {createCard()}}
+              onClick={() => { createCard() }}
             >
               Create Card
             </button>
           </div>
 
-          <h1>{todoCard.title}</h1>
-          {
-            todoCard.todoList.map((element, index) => (
-              <div key={index}>
-                <input type="checkbox" name={element} id={element} />
-                <label htmlFor={element}> {element} </label>
-              </div>
-            ))
-          }
+
+          <h1 className="text-2xl font-normal mt-4 mb-2">{todoCard.title}</h1>
+          <div className="flex flex-col justify-items-start border-solid border-gray-600">
+            {
+              todoCard.todoList.map((item, index) => (
+                <Todo todoText={item} />
+              ))
+            }
+          </div>
         </div>
-      
+
         {/* Container with all to do cards */}
         <div className="grid grid-flow-col auto-cols-fr gap-4 my-8">
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
         </div>
       </main>
     </ div>
