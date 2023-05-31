@@ -58,9 +58,6 @@ export default function Home() {
     })
   }
 
-  // const deleteTodoItem = (event) => {
-  //   console.log(event)
-  // }
 
 
   return (
