@@ -19,6 +19,8 @@ export default function Home() {
 
   const [tempTodoText, setTempTodoText] = useState('');
 
+  const [cardsList, setCardsList] = useState<ItodoCard[]>([])
+
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {value, name} = event.target;
@@ -33,7 +35,6 @@ export default function Home() {
     }
 
     else if(name === 'singletodoText') {
-      console.log('entrou no todo list')
       setTempTodoText(value)
     }
   };
@@ -44,6 +45,18 @@ export default function Home() {
       return {...oldTodoCard}
     })
     setTempTodoText('')
+  }
+
+  const createCard = () => {
+    setCardsList((oldCardsList) => {
+      const newCardsList = [...oldCardsList, todoCard]
+      return newCardsList
+    })
+    setTodoCard({
+      title: '',
+    todoList: [],
+    todoDoneList: []
+    })
   }
 
 
@@ -60,6 +73,7 @@ export default function Home() {
           <input
             type="text"
             name="title"
+            value={todoCard.title}
             placeholder="Add a Title"
             className="w-10/12 rounded-md mt-1 outline outline-1 outline-gray-300"
             onChange={(event) => { handleOnChange(event)}}
@@ -72,14 +86,24 @@ export default function Home() {
             placeholder="Add Todo"
             className="w-10/12 rounded-md mt-1 outline outline-1 outline-gray-300"
             onChange={(event) => { handleOnChange(event)}}/>
+          
+          <div className="flex justify-center w-full">
+            <button
+              className="w-1/4 rounded-md border-solid border-2 border-gray-400 mt-4 mr-2 p-1"
+              onClick={() => {handleOnClick()}}
+            >
+              Add
+            </button>
 
-          <button
-            className="w-1/4 rounded-md border-solid border-2 border-gray-400 mt-4 p-1"
-            onClick={() => {handleOnClick()}}
-          >
-            Add
-          </button>
+            <button
+              className="w-1/4 rounded-md border-solid border-2 border-gray-400 mt-4 ml-2 p-1"
+              onClick={() => {createCard()}}
+            >
+              Create Card
+            </button>
+          </div>
 
+          <h1>{todoCard.title}</h1>
           {
             todoCard.todoList.map((element, index) => (
               <div key={index}>
