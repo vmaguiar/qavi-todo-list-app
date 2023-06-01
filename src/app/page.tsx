@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from "react"
 import { Todo } from "../components/Todo"
 import { Header } from "../components/Header"
 import { CreateCardForm } from "@/components/CreateCardForm"
+import { Card } from "../components/Card"
 
 interface ItodoCard {
   title: string,
@@ -112,14 +113,25 @@ export default function Home() {
           <div className="flex flex-col justify-items-start border-solid border-gray-600">
             {
               todoCard.todoList.map((item, index) => (
-                <Todo todoText={item} index={index} />
+                <Todo todoText={item} index={index} key={index} />
               ))
             }
           </div>
         </div>
 
         {/* Container with all to do cards */}
-        <div className="grid grid-flow-col auto-cols-fr gap-4 my-8">
+        <div className="grid grid-flow-row grid-cols-7 gap-4 my-8">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </div>
       </main>
     </ div>
