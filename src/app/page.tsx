@@ -2,7 +2,9 @@
 
 import { ChangeEvent, useState } from "react"
 
-import { Todo } from "./Todo"
+import { Todo } from "../components/Todo"
+import { Header } from "../components/Header"
+import { CreateCardForm } from "@/components/CreateCardForm"
 
 interface ItodoCard {
   title: string,
@@ -62,11 +64,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <header className="min-w-full flex items-center justify-evenly pt-16">
-        <h1 className="text-4xl font-bold">To do List</h1>
-        <p>Made by: @vmaguiar</p>
-      </header>
+      <Header />
 
+      <CreateCardForm />
 
       <main className="flex flex-col items-center justify-between my-16">
         <div className="flex flex-col items-center w-2/4 rounded-md border-solid border-2 border-gray-400 p-6 bg-white">
