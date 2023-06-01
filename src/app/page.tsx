@@ -69,7 +69,7 @@ export default function Home() {
 
       <CreateCardForm />
 
-      <main className="flex flex-col items-center justify-between my-16">
+      {/* <main className="flex flex-col items-center justify-between my-16">
         <div className="flex flex-col items-center w-2/4 rounded-md border-solid border-2 border-gray-400 p-6 bg-white">
           <p>Title</p>
           <input
@@ -117,23 +117,23 @@ export default function Home() {
               ))
             }
           </div>
-        </div>
+        </div> */}
 
-        {/* Container with all to do cards */}
-        <div className="grid grid-flow-row grid-cols-7 gap-4 my-8">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-      </main>
-    </ div>
+      {/* Container with all to do cards */}
+      <div className="grid grid-flow-row grid-cols-7 gap-4 my-8">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </div>
+      {/* </main> */}
+    </ div >
   )
 };
