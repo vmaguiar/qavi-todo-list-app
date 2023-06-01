@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 
 interface TodoProps {
   todoText: string,
-  index: number
+  index: number,
+  key: number
 }
 
 export function Todo(props: TodoProps) {
@@ -10,7 +11,7 @@ export function Todo(props: TodoProps) {
 
   useEffect(() => {
     setTodo(props.todoText)
-  }, [])
+  }, [props.todoText])
 
   const deleteTodo = () => {
     setTodo('')
@@ -23,25 +24,28 @@ export function Todo(props: TodoProps) {
   }
 
   return (
-    <div className="flex flex-row justify-between" key={props.index}>
-      <div>
-        <input type="checkbox" name={todo} id={todo} />
-        <label htmlFor={todo}> {todo} </label>
-      </div>
+    <div>
+      <div className="flex flex-row justify-between" key={props.index}>
+        <div className="max-w-[200px] break-all">
+          <input type="checkbox" name={todo} id={todo} />
+          <label htmlFor={todo} className="max-w-[200px]"> {todo} </label>
+        </div>
 
-      <div className="ml-4">
-        <button
-          className="mr-2"
-        >
-          Edit
-        </button>
-        <button
-          className="ml-2"
-          onClick={() => { deleteTodo() }}
-        >
-          Del
-        </button>
+        <div className="ml-4 whitespace-nowrap">
+          <button
+            className="mr-2 "
+          >
+            Edit
+          </button>
+          <button
+            className="ml-2"
+            onClick={() => { deleteTodo() }}
+          >
+            Del
+          </button>
+        </div>
       </div>
+      <hr />
     </div>
   )
 }
