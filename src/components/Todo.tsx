@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 interface TodoProps {
   todoText: string,
   index: number,
-  key: number
 }
 
 export function Todo(props: TodoProps) {
@@ -26,26 +25,26 @@ export function Todo(props: TodoProps) {
   return (
     <div>
       <div className="flex flex-row justify-between" key={props.index}>
-        <div className="max-w-[200px] break-all">
+        <div className="max-w-[200px] break-words">
           <input type="checkbox" name={todo} id={todo} />
           <label htmlFor={todo} className="max-w-[200px]"> {todo} </label>
         </div>
 
         <div className="ml-4 whitespace-nowrap">
-          <button
+          {/* <button
             className="mr-2 "
           >
             Edit
-          </button>
-          <button
+          </button> */}
+          {/* <button
             className="ml-2"
             onClick={() => { deleteTodo() }}
           >
-            Del
-          </button>
+            ✖️
+          </button> */}
         </div>
       </div>
-      <hr />
+      {/* <hr /> */}
     </div>
   )
 }
