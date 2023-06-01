@@ -34,51 +34,102 @@ export function CreateCardForm() {
   };
 
   const addToCard = () => {
-    if (tempTodoText) {
+    if (tempTodoText !== '') {
       setCreateTodoCard((oldCreateTodoCard) => {
-        oldCreateTodoCard.todoList.push(tempTodoText)
-        return { ...oldCreateTodoCard }
+        const newTodoList = [...oldCreateTodoCard.todoList, tempTodoText]
+        // oldCreateTodoCard.todoList.push(tempTodoText)
+        return { ...oldCreateTodoCard, todoList: newTodoList }
       })
       setTempTodoText('')
     }
+    else {
+      console.log('campo vazio')
+    }
   }
 
+  const delOfCard = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { value } = event.currentTarget
+
+    setCreateTodoCard((oldCreateTodoCard) => {
+      //create new array without the macthing "todo" using filter
+      const newTodoList = oldCreateTodoCard.todoList.filter((item) => item !== value)
+      return { ...oldCreateTodoCard, todoList: newTodoList }
+    })
+
+  }
+
+  //Create card é aqui?? Acho q é no component Card
+  const createCard = () => {
+  }
 
   return (
     <div>
       <form className="w-[600px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(0,0,0,0.5)]">
-        <input
-          type="text"
-          placeholder="Title"
-          name="title"
-          className="w-full mb-1 p-1 border-none outline-none resize-none"
-          onChange={(event) => { handleOnChange(event) }}
-        />
-        <div className="flex flex-row w-full mt-1">
-          <input type="checkbox" name={tempTodoText} />
+        <div className="flex mb-1">
+          <input
+            type="text"
+            placeholder="Title"
+            name="title"
+            className="w-full p-1 border-none outline-none resize-none"
+            onChange={(event) => { handleOnChange(event) }}
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault()
+              }
+            }}
+          />
+
+          <button
+            className="float-right"
+          >✅
+          </button>
+        </div>
+
+
+        <div className="flex flex-row w-full mt-1" >
+          {
+            tempTodoText ? (<input type="checkbox" name={tempTodoText} />) : null
+          }
+          {/* <input type="checkbox" name={tempTodoText} /> */}
           <input
             type="text"
             name="content"
+            value={tempTodoText}
             placeholder="Todo..."
             className="min-h-[40px] w-full p-1 border-none outline-none"
             onChange={(event) => { handleOnChange(event) }}
             onKeyPress={(event) => {
-              if (event.key === 'Enter') { addToCard() }
+              if (event.key === 'Enter') {
+                event.preventDefault()
+                addToCard()
+              }
             }}
           />
-
-          {
-            createTodoCard.todoList.map((item, index) => (
-              <Todo todoText={item} index={index} key={index} />
-            ))
-          }
-
-
-          {/* <label htmlFor="todo1">
-            todo1
-          </label> */}
         </div>
-      </form>
+
+
+        {
+          createTodoCard.todoList.map((item, index) => (
+            <ul key={index}>
+              <div className="flex flex-row justify-between">
+                <Todo todoText={item} index={index} />
+
+                <button
+                  className="ml-2"
+                  value={item}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    delOfCard(event)
+                  }}
+                >
+                  ✖️
+                </button>
+              </div>
+              <hr />
+            </ul>
+          ))
+        }
+      </form >
     </div >
   )
 }
