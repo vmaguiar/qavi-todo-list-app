@@ -120,17 +120,7 @@ export default function Home() {
         </div> */}
 
       {/* Container with all to do cards */}
-      <div className="grid grid-flow-row grid-cols-7 gap-4 my-8">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+      <div className="grid grid-flow-row grid-cols-5 gap-4 my-8">
         <Card />
       </div>
       {/* </main> */}
