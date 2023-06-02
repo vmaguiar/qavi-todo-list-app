@@ -1,8 +1,9 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useContext, useEffect, useState } from "react"
 
 import { Todo } from './Todo'
+import { CardsContext } from "@/utils/CardsContext";
 
-interface ItodoCard {
+export interface ItodoCard {
   title: string,
   todoList: string[],
   todoDoneList: string[]
@@ -16,6 +17,16 @@ export function CreateCardForm() {
   })
 
   const [tempTodoText, setTempTodoText] = useState('');
+
+  const { cardsList, setCardsList } = useContext(CardsContext)
+
+
+  // useEffect(() => {
+  //   if (cardsList.length > 0) {
+  //     localStorage.setItem('cards', JSON.stringify(cardsList))
+  //   }
+  // }, [cardsList])
+
 
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +44,8 @@ export function CreateCardForm() {
     }
   };
 
+
+
   const addToCard = () => {
     if (tempTodoText !== '') {
       setCreateTodoCard((oldCreateTodoCard) => {
@@ -47,6 +60,8 @@ export function CreateCardForm() {
     }
   }
 
+
+
   const delOfCard = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { value } = event.currentTarget
 
@@ -58,8 +73,11 @@ export function CreateCardForm() {
 
   }
 
+
+
   //Create card é aqui?? Acho q é no component Card
   const createCard = () => {
+    setCardsList((oldCardList) => [...oldCardList, createTodoCard])
   }
 
   return (
@@ -81,6 +99,10 @@ export function CreateCardForm() {
 
           <button
             className="float-right"
+            onClick={(event) => {
+              event.preventDefault()
+              createCard()
+            }}
           >✅
           </button>
         </div>
