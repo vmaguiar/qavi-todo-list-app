@@ -21,13 +21,6 @@ export function CreateCardForm() {
   const { cardsList, setCardsList } = useContext(CardsContext)
 
 
-  // useEffect(() => {
-  //   if (cardsList.length > 0) {
-  //     localStorage.setItem('cards', JSON.stringify(cardsList))
-  //   }
-  // }, [cardsList])
-
-
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
@@ -78,6 +71,12 @@ export function CreateCardForm() {
   //Create card é aqui?? Acho q é no component Card
   const createCard = () => {
     setCardsList((oldCardList) => [...oldCardList, createTodoCard])
+
+    setCreateTodoCard({
+      title: '',
+      todoList: [],
+      todoDoneList: []
+    })
   }
 
   return (
@@ -86,6 +85,7 @@ export function CreateCardForm() {
         <div className="flex mb-1">
           <input
             type="text"
+            value={createTodoCard.title || ''}
             placeholder="Title"
             name="title"
             className="w-full p-1 border-none outline-none resize-none"
