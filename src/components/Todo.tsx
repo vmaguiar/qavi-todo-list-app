@@ -31,20 +31,8 @@ export function Todo(props: TodoProps) {
         </div>
 
         <div className="ml-4 whitespace-nowrap">
-          {/* <button
-            className="mr-2 "
-          >
-            Edit
-          </button> */}
-          {/* <button
-            className="ml-2"
-            onClick={() => { deleteTodo() }}
-          >
-            ✖️
-          </button> */}
         </div>
       </div>
-      {/* <hr /> */}
     </div>
   )
 }
