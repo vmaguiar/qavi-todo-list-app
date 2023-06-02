@@ -7,13 +7,6 @@ import { CardsContext } from "@/utils/CardsContext"
 export function Cards() {
   const { cardsList, setCardsList } = useContext(CardsContext)
 
-  // useEffect(() => {
-  //   const storedCard = localStorage.getItem('cards')
-  //   if (storedCard) {
-  //     setCardsList(JSON.parse(storedCard))
-  //   }
-  // }, [])
-
   return (
     <>
       {
@@ -24,10 +17,13 @@ export function Cards() {
             <h1>{item.title}</h1>
             {
               item.todoList.map((todoItem, todoIndex) => (
-                <Todo todoText={todoItem} index={todoIndex} key={todoIndex} />
+                <div key={todoIndex}>
+                  < Todo todoText={todoItem} index={todoIndex} />
+                  <hr />
+                </div>
               ))
             }
-          </div>
+          </div >
         ))
       }
     </>
