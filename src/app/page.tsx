@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from "react"
 import { Todo } from "../components/Todo"
 import { Header } from "../components/Header"
 import { CreateCardForm } from "@/components/CreateCardForm"
-import { Card } from "../components/Card"
+import { Cards } from "../components/Cards"
 
 interface ItodoCard {
   title: string,
@@ -25,41 +25,41 @@ export default function Home() {
   const [cardsList, setCardsList] = useState<ItodoCard[]>([])
 
 
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
-    // console.log(name);
+  // const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { value, name } = event.target;
+  //   // console.log(name);
 
-    if (name === 'title') {
-      setTodoCard((oldTodoCard) => {
-        const newTodoList = { ...oldTodoCard, title: value }
-        return newTodoList;
-      })
-    }
+  //   if (name === 'title') {
+  //     setTodoCard((oldTodoCard) => {
+  //       const newTodoList = { ...oldTodoCard, title: value }
+  //       return newTodoList;
+  //     })
+  //   }
 
-    else if (name === 'singletodoText') {
-      setTempTodoText(value)
-    }
-  };
+  //   else if (name === 'singletodoText') {
+  //     setTempTodoText(value)
+  //   }
+  // };
 
-  const handleOnClick = () => {
-    setTodoCard((oldTodoCard) => {
-      oldTodoCard.todoList.push(tempTodoText)
-      return { ...oldTodoCard }
-    })
-    setTempTodoText('')
-  }
+  // const handleOnClick = () => {
+  //   setTodoCard((oldTodoCard) => {
+  //     oldTodoCard.todoList.push(tempTodoText)
+  //     return { ...oldTodoCard }
+  //   })
+  //   setTempTodoText('')
+  // }
 
-  const createCard = () => {
-    setCardsList((oldCardsList) => {
-      const newCardsList = [...oldCardsList, todoCard]
-      return newCardsList
-    })
-    setTodoCard({
-      title: '',
-      todoList: [],
-      todoDoneList: []
-    })
-  }
+  // const createCard = () => {
+  //   setCardsList((oldCardsList) => {
+  //     const newCardsList = [...oldCardsList, todoCard]
+  //     return newCardsList
+  //   })
+  //   setTodoCard({
+  //     title: '',
+  //     todoList: [],
+  //     todoDoneList: []
+  //   })
+  // }
 
 
 
@@ -121,7 +121,7 @@ export default function Home() {
 
       {/* Container with all to do cards */}
       <div className="grid grid-flow-row grid-cols-5 gap-4 my-8">
-        <Card />
+        <Cards />
       </div>
       {/* </main> */}
     </ div >
