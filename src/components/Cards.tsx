@@ -14,9 +14,6 @@ export function Cards() {
 
 
   const deleteCard = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, card: ItodoCard) => {
-    // console.log(card)
-    // console.log(event.target)
-
     setCardsList((oldCardList) => {
       const newCardsList = oldCardList.filter((item) => item.title !== card.title)
       localStorage.setItem('cards', JSON.stringify(newCardsList))
@@ -33,14 +30,6 @@ export function Cards() {
 
 
   const handleTodoChange = (event: React.ChangeEvent<HTMLInputElement>, todoIndex: number) => {
-    //   const newCardList = [...cardsList]
-    //   newCardList.forEach((card) => {
-    //     if (card === editCard) {
-    //       card.todoList[todoIndex] = event.target.value
-    //     }
-    //   })
-    //   setCardsList(newCardList)
-    // }
     setNewTodo((prevTodos) => {
       const updatedTodos = [...prevTodos]
       updatedTodos[todoIndex] = event.target.value
@@ -66,16 +55,6 @@ export function Cards() {
         const updatedList = oldList.filter((_, index) => index !== todoIndex)
         return updatedList
       })
-
-
-      // setEditCard((oldCard) => {
-      //   if (oldCard) {
-      //     const updatedTodoList = oldCard.todoList.filter((_, index) => index !== todoIndex)
-      //     setNewTodo(updatedTodoList)
-      //     return { ...oldCard, todoList: updatedTodoList }
-      //   }
-      //   return oldCard
-      // })
     }
   }
 

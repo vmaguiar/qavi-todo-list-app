@@ -43,7 +43,6 @@ export function CreateCardForm() {
     if (tempTodoText !== '') {
       setCreateTodoCard((oldCreateTodoCard) => {
         const newTodoList = [...oldCreateTodoCard.todoList, tempTodoText]
-        // oldCreateTodoCard.todoList.push(tempTodoText)
         return { ...oldCreateTodoCard, todoList: newTodoList }
       })
       setTempTodoText('')
@@ -68,7 +67,6 @@ export function CreateCardForm() {
 
 
 
-  //Create card é aqui?? Acho q é no component Card
   const createCard = () => {
     setCardsList((oldCardList) => [...oldCardList, createTodoCard])
 
@@ -112,7 +110,7 @@ export function CreateCardForm() {
           {
             tempTodoText ? (<input type="checkbox" name={tempTodoText} />) : null
           }
-          {/* <input type="checkbox" name={tempTodoText} /> */}
+
           <input
             type="text"
             name="content"
