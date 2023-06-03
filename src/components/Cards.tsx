@@ -8,6 +8,9 @@ export function Cards() {
   const { cardsList, setCardsList } = useContext(CardsContext)
   const [editCard, setEditCard] = useState<ItodoCard | null>(null)
   const [editCardTitle, setEditCardTitle] = useState('')
+  const [newTodo, setNewTodo] = useState<string[]>([])
+  const [tempNewTodo, setTempNewTodo] = useState('')
+
 
 
   const deleteCard = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, card: ItodoCard) => {
@@ -25,43 +28,73 @@ export function Cards() {
   const editCardFunc = (card: ItodoCard) => {
     setEditCard(card)
     setEditCardTitle(card.title)
+    setNewTodo([...card.todoList])
   }
 
 
   const handleTodoChange = (event: React.ChangeEvent<HTMLInputElement>, todoIndex: number) => {
-    const newCardList = [...cardsList]
-    newCardList.forEach((card) => {
-      if (card === editCard) {
-        card.todoList[todoIndex] = event.target.value
-      }
-    })
-    setCardsList(newCardList)
+    //   const newCardList = [...cardsList]
+    //   newCardList.forEach((card) => {
+    //     if (card === editCard) {
+    //       card.todoList[todoIndex] = event.target.value
+    //     }
+    //   })
+    //   setCardsList(newCardList)
+    // }
+    setNewTodo((prevTodos) => {
+      const updatedTodos = [...prevTodos]
+      updatedTodos[todoIndex] = event.target.value
+      return updatedTodos
+    });
+  }
+
+
+  const addNewTodo = () => {
+    if (tempNewTodo !== '') {
+      setNewTodo((prevTodos) => [...prevTodos, tempNewTodo])
+      setTempNewTodo('')
+    } else {
+      alert('Campo em branco')
+    }
+  }
+
+
+
+  const deleteTodo = (todoIndex: number) => {
+    if (editCard) {
+      setNewTodo((oldList) => {
+        const updatedList = oldList.filter((_, index) => index !== todoIndex)
+        return updatedList
+      })
+
+
+      // setEditCard((oldCard) => {
+      //   if (oldCard) {
+      //     const updatedTodoList = oldCard.todoList.filter((_, index) => index !== todoIndex)
+      //     setNewTodo(updatedTodoList)
+      //     return { ...oldCard, todoList: updatedTodoList }
+      //   }
+      //   return oldCard
+      // })
+    }
   }
 
 
   const saveEdit = () => {
-    // setEditCard((oldCard) => {
-    //   if (oldCard) {
-    //     oldCard.title = editCardTitle
-    //   }
-    //   return oldCard
-    // })
-    // setEditCardTitle('')
-    // localStorage.setItem('cards', JSON.stringify(cardsList))
-
-    setCardsList((oldCardsList) => {
-      const updatedList = oldCardsList.map((card) => {
+    setCardsList((oldCardsList) =>
+      oldCardsList.map((card) => {
         if (card === editCard) {
-          return { ...card, title: editCardTitle };
+          return { ...card, title: editCardTitle, todoList: [...newTodo] }
         }
-        return card;
-      });
-      localStorage.setItem('cards', JSON.stringify(updatedList));
-      return updatedList;
-    });
-    setEditCard(null);
-    setEditCardTitle('');
-  }
+        return card
+      })
+    );
+
+    setEditCard(null)
+    setEditCardTitle('')
+    setNewTodo([])
+  };
+
 
 
   return (
@@ -76,21 +109,44 @@ export function Cards() {
                 value={editCardTitle}
                 onChange={(event) => setEditCardTitle(event.target.value)}
               />
-              {editCard.todoList.map((todoItem, todoIndex) => (
+
+
+              {newTodo.map((todoItem, todoIndex) => (
                 <div key={todoIndex}>
                   <input
                     type="text"
                     value={todoItem}
                     onChange={(event) => handleTodoChange(event, todoIndex)}
                   />
+                  <button onClick={() => deleteTodo(todoIndex)}>✖️</button>
                 </div>
               ))}
-              <button onClick={saveEdit}>Save</button>
+
+
+              <input
+                type="text"
+                name="content"
+                value={tempNewTodo}
+                placeholder="New Todo..."
+                className="min-h-[40px] w-full p-1 border-none outline-none"
+                onChange={(event) => { setTempNewTodo(event.currentTarget.value) }}
+                onKeyPress={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault()
+                    addNewTodo()
+                  }
+                }}
+              />
+
+              <div className="flex justify-between">
+                <button onClick={addNewTodo}>Add Todo</button>
+                <button onClick={saveEdit}>Save</button>
+              </div>
             </div>
           ) :
           (
             cardsList.map((item: ItodoCard, index: number) => (
-              <div className="flex flex-col w-[250px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(0,0,0,0.5)]"
+              <div className="flex flex-col max-h-[200px] w-[250px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(0,0,0,0.5)]"
                 key={index}
               >
                 <div className="flex flex-row justify-between">
@@ -108,46 +164,19 @@ export function Cards() {
                     </button>
                   </div>
                 </div>
-                {
-                  item.todoList.map((todoItem, todoIndex) => (
-                    <div key={todoIndex}>
-                      < Todo todoText={todoItem} index={todoIndex} />
-                      <hr />
-                    </div>
-                  ))
-                }
+                <div className="overflow-y-auto">
+                  {
+                    item.todoList.map((todoItem, todoIndex) => (
+                      <div key={todoIndex}>
+                        < Todo todoText={todoItem} index={todoIndex} />
+                        <hr />
+                      </div>
+                    ))
+                  }
+                </div>
               </div >
             ))
           )
-        //   cardsList.map((item: ItodoCard, index: number) => (
-        // <div className="flex flex-col w-[250px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(0,0,0,0.5)]"
-        //   key={index}
-        // >
-        //   <div className="flex flex-row justify-between">
-        //     <h1>{item.title}</h1>
-
-        //     <div>
-        //       <button onClick={(event) => { asosa(event) }}>
-        //         📝
-        //       </button>
-
-        //       <button onClick={(event) => {
-        //         deleteCard(event, item)
-        //       }}>
-        //         ✖️
-        //       </button>
-        //     </div>
-        //   </div>
-        //   {
-        //     item.todoList.map((todoItem, todoIndex) => (
-        //       <div key={todoIndex}>
-        //         < Todo todoText={todoItem} index={todoIndex} />
-        //         <hr />
-        //       </div>
-        //     ))
-        //   }
-        // </div >
-        // ))
       }
     </>
   )
