@@ -26,7 +26,7 @@ export function Todo(props: TodoProps) {
     <div>
       <div className="flex flex-row justify-between" key={props.index}>
         <div className="max-w-[200px] break-words">
-          <input type="checkbox" name={todoId} id={todoId} />
+          <input className="mr-1" type="checkbox" name={todoId} id={todoId} />
           <label htmlFor={todoId} className="max-w-[200px]">
             {todo}
           </label>
