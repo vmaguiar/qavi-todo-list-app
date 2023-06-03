@@ -71,7 +71,7 @@ export function Cards() {
           (
             <div className="col-span-5 flex flex-col w-[600px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(0,0,0,0.5)]">
               <input
-                className="text-[18px]"
+                className="text-[20px] font-medium"
                 type="text"
                 value={editCardTitle}
                 onChange={(event) => setEditCardTitle(event.target.value)}
@@ -94,7 +94,7 @@ export function Cards() {
                 key={index}
               >
                 <div className="flex flex-row justify-between">
-                  <h1>{item.title}</h1>
+                  <h1 className="text-[20px] font-medium">{item.title}</h1>
 
                   <div>
                     <button onClick={() => editCardFunc(item)}>

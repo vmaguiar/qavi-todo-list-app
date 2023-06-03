@@ -88,7 +88,7 @@ export function CreateCardForm() {
             value={createTodoCard.title || ''}
             placeholder="Title"
             name="title"
-            className="w-full p-1 border-none outline-none resize-none"
+            className="text-[20px] font-medium w-full p-1 border-none outline-none resize-none"
             onChange={(event) => { handleOnChange(event) }}
             onKeyPress={(event) => {
               if (event.key === 'Enter') {
