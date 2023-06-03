@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { use, useContext, useEffect, useState } from "react"
 
 import { Todo } from "./Todo"
 import { ItodoCard } from "./CreateCardForm"
@@ -6,15 +6,25 @@ import { CardsContext } from "@/utils/CardsContext"
 
 export function Cards() {
   const { cardsList, setCardsList } = useContext(CardsContext)
+  const [editCard, setEditCard] = useState<ItodoCard | null>(null)
 
-  const deleteCard = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    console.log('Deletou Card')
-    const { value } = event.currentTarget
+
+  const deleteCard = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, card: ItodoCard) => {
+    // console.log(card)
+    // console.log(event.target)
+
+    setCardsList((oldCardList) => {
+      const newCardsList = oldCardList.filter((item) => item.title !== card.title)
+      localStorage.setItem('cards', JSON.stringify(newCardsList))
+      return newCardsList
+    })
   }
 
-  const editCard = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+  const asosa = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     console.log('entrou no Edit Mode')
   }
+
 
   return (
     <>
@@ -27,12 +37,12 @@ export function Cards() {
               <h1>{item.title}</h1>
 
               <div>
-                <button onClick={(event) => { editCard(event) }}>
+                <button onClick={(event) => { asosa(event) }}>
                   📝
                 </button>
 
                 <button onClick={(event) => {
-                  deleteCard(event)
+                  deleteCard(event, item)
                 }}>
                   ✖️
                 </button>
