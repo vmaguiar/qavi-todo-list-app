@@ -5,11 +5,11 @@ import { CreateCardForm } from "@/components/CreateCardForm"
 import { Cards } from "../components/Cards"
 import { CardsProvider } from "@/utils/CardsContext"
 
-interface ItodoCard {
-  title: string,
-  todoList: string[],
-  todoDoneList: string[]
-};
+// interface ItodoCard {
+//   title: string,
+//   todoList: string[],
+//   todoDoneList: string[]
+// };
 
 export default function Home() {
 
