@@ -16,9 +16,7 @@ export function Cards() {
 
 
   useEffect(() => {
-    if (selectedCards !== null) {
-      setFilteredCards(selectedCards)
-    }
+    setFilteredCards(selectedCards)
   }, [selectedCards])
 
 
@@ -90,6 +88,11 @@ export function Cards() {
 
   //Function that find the card with matching data from SearchBar input
   const searchCard = (searchQuery: string) => {
+    console.log(searchQuery)
+    if (searchQuery === '') {
+      setSelectedCards(null)
+      return
+    }
     const foundCards = cardsList.filter((card) => {
       return (
         card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -100,7 +103,7 @@ export function Cards() {
     setSelectedCards(foundCards || null)
   }
 
-  console.log(filterdCards)
+
 
   return (
     <>
