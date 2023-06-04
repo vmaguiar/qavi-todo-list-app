@@ -1,5 +1,5 @@
 
-import react, { createContext, useState, useEffect, ReactNode } from "react"
+import React, { createContext, useState, useEffect, ReactNode } from "react"
 
 interface ItodoCard {
   title: string,
@@ -9,7 +9,7 @@ interface ItodoCard {
 
 interface CardsContexProps {
   cardsList: ItodoCard[],
-  setCardsList: React.Dispatch<react.SetStateAction<ItodoCard[]>>
+  setCardsList: React.Dispatch<React.SetStateAction<ItodoCard[]>>
 
 }
 
