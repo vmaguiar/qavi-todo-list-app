@@ -3,7 +3,7 @@ import { Todo } from "./Todo"
 
 
 export function Todos() {
-  const { data: todos, isLoading, isError } = api.todo.getfakeAllTodos.useQuery()
+  const { data: todos, isLoading, isError } = api.todo.getAllTodos.useQuery()
 
   if (isLoading) {
     return <div>🔄 Loading Todos... 🔄</div>

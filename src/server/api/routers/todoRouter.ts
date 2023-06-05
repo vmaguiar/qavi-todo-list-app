@@ -6,23 +6,9 @@ import { todoInput } from "~/types";
 
 
 export const todoRouter = createTRPCRouter({
-  getfakeAllTodos: publicProcedure.query(({ ctx }) => {
-    return [
-      {
-        id: `fake id`,
-        todoText: `fake todoText`,
-        checked: false,
-      },
-      {
-        id: `second fake id`,
-        todoText: `second fake todoText `,
-        checked: true,
-      }
-    ];
-  }),
-
-  getAllTodos: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.todo.findMany();
+  getAllTodos: publicProcedure.query(async ({ ctx }) => {
+    const todos = await ctx.prisma.todo.findMany()
+    return todos.map(({ id, todoText, checked }) => ({ id, todoText, checked }))
   }),
 
   createTodo: publicProcedure
