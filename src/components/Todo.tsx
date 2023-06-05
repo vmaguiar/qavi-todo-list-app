@@ -1,4 +1,5 @@
 import type { Todo } from "~/types";
+import { api } from "~/utils/api";
 
 
 type TodoProps = {
@@ -7,6 +8,13 @@ type TodoProps = {
 export function Todo({ todo }: TodoProps) {
   const { id, todoText, checked } = todo
 
+  const trpc = api.useContext()
+
+  const { mutate: checkedMutation } = api.todo.toggleCheckedTodo.useMutation({
+    onSettled: async () => {
+      await trpc.todo.getAllTodos.invalidate()
+    }
+  })
 
   return (
     // <>
@@ -22,6 +30,7 @@ export function Todo({ todo }: TodoProps) {
             type="checkbox"
             name={id}
             id={id}
+            onChange={(event) => { checkedMutation({ id, checked: event.target.checked }) }}
           />
           <label htmlFor={id} className="cursor-pointer max-w-[200px]">
             {todoText}
