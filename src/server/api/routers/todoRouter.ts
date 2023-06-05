@@ -1,8 +1,12 @@
-import { boolean, z } from "zod";
+import { z } from "zod";
+
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
+import { todoInput } from "~/types";
+
+
 export const todoRouter = createTRPCRouter({
-  getfakeAllTodo: publicProcedure.query(({ ctx }) => {
+  getfakeAllTodos: publicProcedure.query(({ ctx }) => {
     return [
       {
         id: `fake id`,
@@ -22,7 +26,7 @@ export const todoRouter = createTRPCRouter({
   }),
 
   createTodo: publicProcedure
-    .input(z.string({ required_error: "Describe your todo" }).min(1).max(30))
+    .input(todoInput)
     .mutation(async ({ ctx, input }) => {
       return ctx.prisma.todo.create({
         data: {
