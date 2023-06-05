@@ -1,3 +1,5 @@
+import { toast } from "react-hot-toast";
+
 import type { Todo } from "~/types";
 import { api } from "~/utils/api";
 
@@ -13,6 +15,11 @@ export function Todo({ todo }: TodoProps) {
   const { mutate: checkedMutation } = api.todo.toggleCheckedTodo.useMutation({
     onSettled: async () => {
       await trpc.todo.getAllTodos.invalidate()
+    },
+    onSuccess: (err, { checked }) => {
+      if (checked) {
+        toast.success('🎊 Todo completed!! 🎉')
+      }
     }
   })
 
@@ -34,7 +41,7 @@ export function Todo({ todo }: TodoProps) {
             id={id}
             onChange={(event) => { checkedMutation({ id, checked: event.target.checked }) }}
           />
-          <label htmlFor={id} className="cursor-pointer max-w-[200px]">
+          <label htmlFor={id} className={`cursor-pointer max-w-[200px] ${checked ? 'line-through' : ''}`}>
             {todoText}
           </label>
         </div>
