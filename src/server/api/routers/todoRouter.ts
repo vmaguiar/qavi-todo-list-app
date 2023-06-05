@@ -21,6 +21,9 @@ export const todoRouter = createTRPCRouter({
       })
     }),
 
+  // updateTodo: publicProcedure
+  // .input()
+
   deleteTodo: publicProcedure
     .input(z.string())
     .mutation(async ({ ctx, input }) => {
