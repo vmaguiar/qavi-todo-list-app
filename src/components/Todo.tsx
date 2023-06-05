@@ -16,11 +16,13 @@ export function Todo({ todo }: TodoProps) {
     }
   })
 
-  return (
-    // <>
-    //   {todoText}
-    // </>
+  const { mutate: deleteMutation } = api.todo.deleteTodo.useMutation({
+    onSettled: async () => {
+      await trpc.todo.getAllTodos.invalidate()
+    }
+  })
 
+  return (
     <>
       <div className="w-full flex flex-row justify-between" key={id}>
         <div className="max-w-[200px] break-words">
@@ -37,10 +39,9 @@ export function Todo({ todo }: TodoProps) {
           </label>
         </div>
 
-        <button>✖</button>
-
-        {/* <div className="ml-4 whitespace-nowrap">
-        </div> */}
+        <button onClick={(event) => deleteMutation(id)}>
+          ✖
+        </button>
       </div>
     </>
   )
