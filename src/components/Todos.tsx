@@ -17,10 +17,7 @@ export function Todos() {
       {
         todos.length ? (todos.map((todo) => {
           return (
-            <>
-              <Todo key={todo.id} todo={todo} />
-              <hr />
-            </>
+            <Todo key={todo.id} todo={todo} />
           )
         })) :
           'Create your First Todo...'

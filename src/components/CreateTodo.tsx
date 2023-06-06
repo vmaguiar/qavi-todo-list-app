@@ -55,7 +55,6 @@ export function CreateTodo() {
 
     //create todo mutation here
     mutate(newTodoInput)
-    // setNewTodoInput('')
   }
 
 
@@ -76,7 +75,6 @@ export function CreateTodo() {
             setNewTodoInput(event.target.value)
           }}
         />
-        <button>Create</button>
       </form>
     </div>
   )

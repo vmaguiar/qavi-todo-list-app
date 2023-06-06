@@ -11,6 +11,7 @@ export const todoRouter = createTRPCRouter({
     return todos.map(({ id, todoText, checked }) => ({ id, todoText, checked }))
   }),
 
+
   createTodo: publicProcedure
     .input(todoInput)
     .mutation(async ({ ctx, input }) => {
@@ -21,8 +22,23 @@ export const todoRouter = createTRPCRouter({
       })
     }),
 
-  // updateTodo: publicProcedure
-  // .input()
+
+  updateTodo: publicProcedure
+    .input(z.object({
+      id: z.string(),
+      todoText: todoInput
+    }))
+    .mutation(async ({ ctx, input: { id, todoText } }) => {
+      return ctx.prisma.todo.update({
+        where: {
+          id: id
+        },
+        data: {
+          todoText: todoText
+        }
+      })
+    }),
+
 
   deleteTodo: publicProcedure
     .input(z.string())
@@ -33,6 +49,7 @@ export const todoRouter = createTRPCRouter({
         }
       })
     }),
+
 
   toggleCheckedTodo: publicProcedure
     .input(z.object({
