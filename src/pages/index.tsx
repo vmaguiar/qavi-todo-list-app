@@ -4,6 +4,7 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import { Todos } from "../components/Todos";
 import { CreateTodo } from "~/components/CreateTodo";
+import { SearchBar } from "~/components/SearchBar";
 
 const Home: NextPage = () => {
 
@@ -17,34 +18,38 @@ const Home: NextPage = () => {
         />
       </Head>
 
-
-      <div className="text-white flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+      <div className="min-h-screen bg-gradient-to-b from-[#15162c] to-[#2e026d]">
         <Header />
-        <h1 className="text-2xl font-semibold">My Tasks List</h1>
 
-        <div className="text-black flex flex-col max-h-[350px] w-[600px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(250,250,250,0.5)]">
-          <div className="h-[50px] flex flex-row justify-between">
-            <input
-              className="text-[20px] font-medium w-3/4"
-              type="text" name="title" id="title"
-              placeholder="Title..."
-            />
 
-            <div>
-              <button>
-                📝
-              </button>
+        <div className="text-white flex min-h-full flex-col items-center">
+          <h1 className="text-2xl font-semibold">My Tasks List</h1>
 
-              <button>
-                ✖️
-              </button>
+          <div className="text-black flex flex-col max-h-[350px] w-[400px] relative mx-auto mt-4 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(250,250,250,0.5)]">
+            <div className="h-[50px] flex flex-row justify-between">
+              <input
+                className="text-[20px] font-medium w-3/4"
+                type="text" name="title" id="title"
+                placeholder="Title..."
+              />
+
+              {/* <div>
+                <button>
+                  📝
+                </button>
+
+                <button>
+                  ✖️
+                </button>
+              </div> */}
             </div>
-          </div>
 
-          <div className="overflow-y-auto">
-            <Todos />
+            <div className="overflow-y-auto">
+              <Todos />
+            </div>
+            <CreateTodo />
           </div>
-          <CreateTodo />
+          <SearchBar />
         </div>
       </div>
     </>
