@@ -56,11 +56,11 @@ export function Todo({ todo }: TodoProps) {
 
   return (
     <>
-      <div className="w-full flex flex-row justify-between" key={id}>
+      <div className="w-full flex flex-row justify-between mb-1 mt-1" key={id}>
         {
           updateMode ? (
             <>
-              <div className="max-w-[200px] break-words">
+              <div className="w-3/4 break-words">
                 <form
                   onSubmit={(event) => {
                     event.preventDefault()
@@ -75,7 +75,7 @@ export function Todo({ todo }: TodoProps) {
                   />
 
                   <input
-                    className={`cursor-pointer max-w-[200px] ${checked ? 'line-through' : ''}`}
+                    className={`w-3/4 ml-1 outline-none ${checked ? 'line-through' : ''}`}
                     type="text" name={id} id={id} value={updateText}
                     onChange={(event) => { setUpdateText(event.target.value) }}
                   />

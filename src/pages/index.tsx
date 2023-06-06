@@ -1,14 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 
-import { api } from "~/utils/api";
-
 import { Header } from "../components/Header";
 import { Todos } from "../components/Todos";
 import { CreateTodo } from "~/components/CreateTodo";
 
 const Home: NextPage = () => {
-  // const hello = api.example.getAll.useQuery()
 
   return (
     <>
@@ -25,9 +22,13 @@ const Home: NextPage = () => {
         <Header />
         <h1 className="text-2xl font-semibold">My Tasks List</h1>
 
-        <div className="text-black flex flex-col max-h-[200px] w-[250px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(250,250,250,0.5)]">
-          <div className="flex flex-row justify-between">
-            <h1 className="text-[20px] font-medium">Title</h1>
+        <div className="text-black flex flex-col max-h-[350px] w-[600px] relative mx-auto mt-8 rounded-lg bg-white p-2 shadow-[0_1px_7px_0px_rgba(250,250,250,0.5)]">
+          <div className="h-[50px] flex flex-row justify-between">
+            <input
+              className="text-[20px] font-medium w-3/4"
+              type="text" name="title" id="title"
+              placeholder="Title..."
+            />
 
             <div>
               <button>
@@ -41,11 +42,9 @@ const Home: NextPage = () => {
           </div>
 
           <div className="overflow-y-auto">
-            <div>
-              <Todos />
-              <CreateTodo />
-            </div>
+            <Todos />
           </div>
+          <CreateTodo />
         </div>
       </div>
     </>

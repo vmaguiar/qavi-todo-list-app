@@ -67,7 +67,7 @@ export function CreateTodo() {
         }}
       >
         <input
-          className="text-red"
+          className="w-3/4 mb-1 mt-3 outline-none"
           type="text" name="new-todo" id="new-todo"
           placeholder="new Todo..."
           value={newTodoInput}
