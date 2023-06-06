@@ -15,7 +15,7 @@ You have three options to choose from: front-end only, full stack TypeScript (te
 ### The Front-End only resolution is on front-end-only-branch
 
 <p align='center'>
-  <img width='200' src='src/assets/to_readme/front-app-readme-gif.gif'
+  <img width='400' src='src/assets/to_readme/front-app-readme-gif.gif'
 </p><br>
 
 ## React + Next.js: Front-End only Todo List.
