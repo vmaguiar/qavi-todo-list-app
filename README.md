@@ -60,7 +60,7 @@ You have three options to choose from: front-end only, full stack TypeScript (te
 - [✔️] Use React.js with Next.js for the front-end development.
 - [✔️] Display a list of tasks with the ability to add, update, and delete tasks
 - [✔️] Include proper error handling and validation.
-- [-] Add a search/filter feature to search for specific tasks.
+- [✔️] Add a search/filter feature to search for specific tasks.
 - [✔️] Implement a user-friendly UI with appropriate styling.
 - [✔️] Design a RESTful API for CRUD operations on the back-end.
 - [✔️] Handle data synchronization between the client and server.
