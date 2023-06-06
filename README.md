@@ -8,12 +8,15 @@ You have three options to choose from: front-end only, full stack TypeScript (te
 
 ## This branch is my resolution for the FullStack with T3 stack choice
 
-<!-- Colocar prints ou GIFs
 <p align='center'>
-  <img width='600' src='src/assets/to_readme/app-gif.gif'
-</p><br> -->
+  <img width='600' src='src/assets/to_readme/t3-app-readme-gif.gif'
+</p><br>
 
 ### The Front-End only resolution is on front-end-only-branch
+
+<p align='center'>
+  <img width='400' src='src/assets/to_readme/front-app-readme-gif.gif'
+</p><br>
 
 ## React + Next.js: Front-End only Todo List.
 
